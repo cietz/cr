@@ -28,10 +28,19 @@ app.use(express.json());
 // SERVIR ARQUIVOS ESTÁTICOS COM MAPEAMENTO CORRETO
 // ==========================================
 
-// Mapear /_next/ para store.supercell.com/_next/
+// Mapear /_next/ para store.supercell.com/_next/ (com decode de URL)
 app.use(
   "/_next",
-  express.static(path.join(__dirname, "store.supercell.com/_next"))
+  express.static(path.join(__dirname, "store.supercell.com/_next"), {
+    setHeaders: (res, filePath) => {
+      // Definir MIME types corretos
+      if (filePath.endsWith(".js")) {
+        res.setHeader("Content-Type", "application/javascript");
+      } else if (filePath.endsWith(".css")) {
+        res.setHeader("Content-Type", "text/css");
+      }
+    },
+  })
 );
 
 // Mapear /images/ para store.supercell.com/images/
@@ -49,13 +58,38 @@ app.use(
 // Servir arquivos da raiz
 app.use(express.static("."));
 
-// Serve arquivos estáticos
+// ==========================================
+// ROTAS PRINCIPAIS
+// ==========================================
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.get("/checkout", (req, res) => {
   res.sendFile(path.join(__dirname, "checkout.html"));
+});
+
+// Rota para player API (mock)
+app.get("/player", (req, res) => {
+  const tag = req.query.tag;
+  if (!tag) {
+    return res.status(400).json({ error: "Tag é obrigatória" });
+  }
+
+  // Retorna dados mockados do jogador
+  res.json({
+    tag: tag,
+    name: "Jogador Demo",
+    expLevel: 50,
+    trophies: 6500,
+    bestTrophies: 7200,
+    wins: 1500,
+    losses: 800,
+    clan: {
+      tag: "#CLAN123",
+      name: "Clash Royale BR",
+    },
+  });
 });
 
 // API mock para criar PIX
