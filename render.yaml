@@ -9,6 +9,11 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: RENDER_EXTERNAL_URL
+        fromService:
+          type: web
+          name: clash-royale-store
+          property: url
       - key: UTMIFY_API_TOKEN
         sync: false
       - key: CR_API_TOKEN

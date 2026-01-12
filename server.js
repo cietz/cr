@@ -354,6 +354,47 @@ app.get("/get-ip", async (req, res) => {
 });
 
 // ==========================================
+// KEEP-ALIVE / SELF-PING (Para Render Free Tier)
+// ==========================================
+const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL;
+const KEEP_ALIVE_INTERVAL = 14 * 60 * 1000; // 14 minutos (Render dorme após 15min)
+
+function startKeepAlive() {
+  if (!RENDER_EXTERNAL_URL) {
+    console.log("⚠️ RENDER_EXTERNAL_URL não definida - Keep-alive desativado");
+    console.log(
+      "   Defina a variável de ambiente com a URL do seu site no Render"
+    );
+    return;
+  }
+
+  const keepAliveUrl = `${RENDER_EXTERNAL_URL}/health`;
+
+  console.log("🔄 Keep-alive ativado para:", keepAliveUrl);
+  console.log(`   Ping a cada ${KEEP_ALIVE_INTERVAL / 60000} minutos`);
+
+  setInterval(async () => {
+    try {
+      const fetch = (...args) =>
+        import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
+      const response = await fetch(keepAliveUrl, {
+        method: "GET",
+        headers: { "User-Agent": "KeepAlive-Bot/1.0" },
+      });
+
+      if (response.ok) {
+        console.log(`✅ Keep-alive ping OK - ${new Date().toISOString()}`);
+      } else {
+        console.log(`⚠️ Keep-alive ping falhou: ${response.status}`);
+      }
+    } catch (error) {
+      console.error(`❌ Keep-alive erro: ${error.message}`);
+    }
+  }, KEEP_ALIVE_INTERVAL);
+}
+
+// ==========================================
 // INICIA SERVIDOR
 // ==========================================
 app.listen(PORT, "0.0.0.0", () => {
@@ -362,6 +403,9 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log("🌐 Ambiente:", process.env.NODE_ENV || "development");
   console.log("✅ Servidor pronto e aceitando conexões!");
   console.log("🏥 Healthcheck disponível em /health");
+
+  // Inicia o keep-alive após o servidor estar rodando
+  startKeepAlive();
 });
 
 module.exports = app;
