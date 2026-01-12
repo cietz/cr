@@ -1,0 +1,447 @@
+{
+  "url": "https://store.supercell.com/api/v3/clashroyale/bonus/status",
+  "status": 200,
+  "headers": {
+    "content-encoding": "gzip",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Thu, 18 Dec 2025 03:17:28 GMT",
+    "etag": "W/\"x48ei7ccpq87a\"",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "vary": "accept-encoding",
+    "via": "1.1 523fe19a95b4ed41bf06f2cf2531be24.cloudfront.net (CloudFront)",
+    "x-amz-cf-id": "sBkmPZ4hqYys4GDT-ZA6MNRiF2cEMnTqeklMtrWAaxPsXqkfr7bQqg==",
+    "x-amz-cf-pop": "GIG51-P1",
+    "x-cache": "Miss from cloudfront"
+  },
+  "data": {
+    "balance": 0,
+    "seasonId": "2025-12",
+    "startTimeMillis": null,
+    "endTimeMillis": 1767603600000,
+    "missions": null,
+    "items": [
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158122-0:0",
+        "title": {
+          "en": "20 Rare Wild Cards",
+          "pt": "20 curingas raros"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bb5a7080-6a28-4fec-b7ff-1226e7d4b18d_store_wildcardRare.png",
+        "cost": 200,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 20
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158128-0:0:11250",
+        "title": {
+          "en": "Wild Shard",
+          "pt": "Fragmento curinga"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/c8b88ba0-1788-4e0a-8f8a-506585ddd8d5_store_wildshard.png",
+        "cost": 11250,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158128-0:0:9000",
+        "title": {
+          "en": "Wild Shard",
+          "pt": "Fragmento curinga"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/c8b88ba0-1788-4e0a-8f8a-506585ddd8d5_store_wildshard.png",
+        "cost": 9000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158125-0:0",
+        "title": {
+          "en": "5 Epic Wild Cards",
+          "pt": "5 curingas épicos"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/8ce02abc-ff1b-4a23-8e17-33457a1893e6_store_wildcardEpic.png",
+        "cost": 400,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 5
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158119-0:0",
+        "title": {
+          "en": "500 Common Wild Cards",
+          "pt": "500 curingas comuns"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/ce7ca1b0-47d6-405c-9b88-55bc0f14d57e_store_wildcardCommon.png",
+        "cost": 1000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 500
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158120-0:0",
+        "title": {
+          "en": "1000 Common Wild Cards",
+          "pt": "1000 curingas comuns"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/ce7ca1b0-47d6-405c-9b88-55bc0f14d57e_store_wildcardCommon.png",
+        "cost": 3000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1000
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158130-0:0",
+        "title": {
+          "en": "250 Gems",
+          "pt": "250 gemas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bf734627-2f01-4a93-9cd4-660752508955_store_Gems_small.png",
+        "cost": 600,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 250
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158131-0:0",
+        "title": {
+          "en": "10 Champion Wild Cards",
+          "pt": "10 curingas de campeão"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/2dd65453-f8ce-4b41-8669-443618207314_store_wildcardChampion.png",
+        "cost": 12500,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 10
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158126-0:0",
+        "title": {
+          "en": "10 Epic Wild Cards",
+          "pt": "10 curingas épicos"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/8ce02abc-ff1b-4a23-8e17-33457a1893e6_store_wildcardEpic.png",
+        "cost": 2000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 10
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158121-0:0:100",
+        "title": {
+          "en": "1-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 1 estrela"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/7e24783f-b6ca-4c91-aca8-bd21bfb5e303_store_chestMagic1star.png",
+        "cost": 100,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158121-0:0:500",
+        "title": {
+          "en": "1-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 1 estrela"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/7e24783f-b6ca-4c91-aca8-bd21bfb5e303_store_chestMagic1star.png",
+        "cost": 500,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158121-0:0:300",
+        "title": {
+          "en": "1-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 1 estrela"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/7e24783f-b6ca-4c91-aca8-bd21bfb5e303_store_chestMagic1star.png",
+        "cost": 300,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158121-0:0:750",
+        "title": {
+          "en": "1-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 1 estrela"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/7e24783f-b6ca-4c91-aca8-bd21bfb5e303_store_chestMagic1star.png",
+        "cost": 750,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158116-0:0:8000",
+        "title": {
+          "en": "3-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 3 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/df3d4286-4dac-4ef7-b74c-4b35cd19ad61_store_chestMagic3star.png",
+        "cost": 8000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158116-0:0:10000",
+        "title": {
+          "en": "3-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 3 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/df3d4286-4dac-4ef7-b74c-4b35cd19ad61_store_chestMagic3star.png",
+        "cost": 10000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158129-0:0",
+        "title": {
+          "en": "25 Epic Wild Cards",
+          "pt": "25 curingas épicos"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/8ce02abc-ff1b-4a23-8e17-33457a1893e6_store_wildcardEpic.png",
+        "cost": 7000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 25
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158118-0:0",
+        "title": {
+          "en": "100 Common Wild Cards",
+          "pt": "100 curingas comuns"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/ce7ca1b0-47d6-405c-9b88-55bc0f14d57e_store_wildcardCommon.png",
+        "cost": 50,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 100
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158117-0:0:0",
+        "title": {
+          "en": "2-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 2 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bd2ac9f7-1a55-44fc-9226-2ae2a7f77612_store_chestMagic2star.png",
+        "cost": 0,
+        "available": true,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158117-0:0:6000",
+        "title": {
+          "en": "2-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 2 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bd2ac9f7-1a55-44fc-9226-2ae2a7f77612_store_chestMagic2star.png",
+        "cost": 6000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158117-0:0:1250",
+        "title": {
+          "en": "2-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 2 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bd2ac9f7-1a55-44fc-9226-2ae2a7f77612_store_chestMagic2star.png",
+        "cost": 1250,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158117-0:0:4500",
+        "title": {
+          "en": "2-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 2 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bd2ac9f7-1a55-44fc-9226-2ae2a7f77612_store_chestMagic2star.png",
+        "cost": 4500,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158117-0:0:1750",
+        "title": {
+          "en": "2-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 2 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bd2ac9f7-1a55-44fc-9226-2ae2a7f77612_store_chestMagic2star.png",
+        "cost": 1750,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158117-0:0:2250",
+        "title": {
+          "en": "2-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 2 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bd2ac9f7-1a55-44fc-9226-2ae2a7f77612_store_chestMagic2star.png",
+        "cost": 2250,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158117-0:0:3500",
+        "title": {
+          "en": "2-Star Magic Lucky Chest",
+          "pt": "Baú da sorte mágico de 2 estrelas"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bd2ac9f7-1a55-44fc-9226-2ae2a7f77612_store_chestMagic2star.png",
+        "cost": 3500,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158123-0:0",
+        "title": {
+          "en": "50 Rare Wild Cards",
+          "pt": "50 curingas raros"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bb5a7080-6a28-4fec-b7ff-1226e7d4b18d_store_wildcardRare.png",
+        "cost": 1500,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 50
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158127-0:0:2500",
+        "title": {
+          "en": "Legendary Wild Card",
+          "pt": "Curinga lendário"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/c254217e-bdf6-43cb-84b3-c54b35ce3f64_store_wildcardLegendary.png",
+        "cost": 2500,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158127-0:0:5000",
+        "title": {
+          "en": "Legendary Wild Card",
+          "pt": "Curinga lendário"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/c254217e-bdf6-43cb-84b3-c54b35ce3f64_store_wildcardLegendary.png",
+        "cost": 5000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 1
+      },
+      {
+        "id": "com.supercell.scroll.specialoffertier0.free:chronos:158124-0:0",
+        "title": {
+          "en": "100 Rare Wild Cards",
+          "pt": "100 curingas raros"
+        },
+        "description": {},
+        "gameId": "clashroyale",
+        "image": "https://event-assets.clashroyale.com/bb5a7080-6a28-4fec-b7ff-1226e7d4b18d_store_wildcardRare.png",
+        "cost": 4000,
+        "available": false,
+        "claimed": false,
+        "seasonId": "2025-12",
+        "quantity": 100
+      }
+    ],
+    "completedMissions": []
+  },
+  "timestamp": 1766027936448
+}

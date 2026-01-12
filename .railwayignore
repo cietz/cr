@@ -1,0 +1,58 @@
+# Arquivos e pastas a ignorar no deploy do Railway
+
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Documentação (exceto README)
+*.md
+!README.md
+
+# Testes
+test-*.js
+*.test.js
+*.spec.js
+
+# Exemplos
+utmify-examples.js
+
+# Git
+.git/
+.gitignore
+
+# Ambiente local
+.env.local
+.env.development
+
+# Cache
+.cache/
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+
+# Arquivos temporários
+tmp/
+temp/
+
+# Backup
+*.backup
+*.bak
+
+# Scripts de deploy para outras plataformas
+prepare-deploy.ps1
+DEPLOY-SQUARECLOUD.md
+squarecloud.config
+.squarecloudignore

@@ -1,0 +1,336 @@
+{
+  "url": "https://api.helpshift.com/websdk/supercell/config?did=anonymous&platform-id=supercell_platform&uid=anonymous&user_auth_token=anonymous&nonce=0",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "true",
+    "access-control-allow-headers": "Accept,Authorization,Content-Type,Keep-Alive,Origin,User-Agent,X-Requested-With,X-Hs-Access-Token,X-Hs-Signature",
+    "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "access-control-max-age": "86400",
+    "content-encoding": "gzip",
+    "content-type": "application/json;charset=utf-8",
+    "date": "Thu, 18 Dec 2025 03:17:29 GMT",
+    "server": "nginx",
+    "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+    "vary": "Origin",
+    "x-content-type-options": "nosniff",
+    "x-hs-request-id": "228dbd6c-445a-490b-9a61-07574ead94ff",
+    "x-xss-protection": "1; mode=block"
+  },
+  "data": {
+    "wm_widget_enabled": true,
+    "csat_bot_enabled": false,
+    "resolution_question": "Did we answer all your questions?",
+    "personalised_conversation_enabled": true,
+    "allow_user_attachments": false,
+    "resolution_question_enabled": false,
+    "agent_nickname_enabled": true,
+    "answer_bot_enabled": false,
+    "user_info_bot_enabled": false,
+    "issue_exists": false,
+    "csat_bot": {
+      "req_msg": "How would you rate your chat experience?"
+    },
+    "user_info_bot": {
+      "fields": [
+        "name"
+      ]
+    },
+    "show_conversation_id_enabled": false,
+    "business_hours_enabled": false,
+    "user_auth_status": "1",
+    "disable_helpshift_branding": false,
+    "audio_notifications_enabled": true,
+    "greeting_enabled": true,
+    "author_presence_detection_enabled": true,
+    "autofill_preissues": false,
+    "in_business_hours": true,
+    "avatar": {
+      "show_feed_avatar": true,
+      "show_agent_personalised_avatar": true,
+      "show_bot_personalised_avatar": true,
+      "agent_default_avatar": "https://s3.amazonaws.com/assets.helpshift.com/default-avatars/avatar/agent/64.png",
+      "bot_default_avatar": "https://s3.amazonaws.com/assets.helpshift.com/default-avatars/avatar/bot/64.png",
+      "ai_agent_default_avatar": "https://s3.amazonaws.com/assets.helpshift.com/default-avatars/avatar/ai-agent/64.png",
+      "avatar_template_url": "https://s3.amazonaws.com/assets.helpshift.com/supercell/avatar/{{avatar_id}}/64.png",
+      "system_nickname": "Supercell Support"
+    },
+    "business_hours": {
+      "timings": [
+        {
+          "from": {
+            "hours": 0,
+            "minutes": 0
+          },
+          "to": {
+            "hours": 0,
+            "minutes": 0
+          },
+          "day": "everyday"
+        }
+      ],
+      "timezone": "Europe/Helsinki",
+      "offline_message": "We are offline. Please try again later.",
+      "cf_fields": {
+        "name": false,
+        "email": true,
+        "message": true
+      },
+      "offline_title": "We are offline",
+      "attachments_enabled": false,
+      "offline_behavior": "contact_form",
+      "offline_tags": [],
+      "cf_message": "We are offline. Please leave us a message and we will get back to you once we are back online."
+    },
+    "app": {
+      "id": "supercell_app_20240222111201484-7f080f1733367d1",
+      "title": "Supercell ID"
+    },
+    "appearance": {
+      "widget_title": "Supercell Support",
+      "primary_color": "#453FB9",
+      "colors": {
+        "primary_color": "#2d85f3",
+        "background_color": "#f0f2f4",
+        "alt_background_color": "#e8ecef",
+        "content_color": "#666666",
+        "foreground_color": "#ffffff",
+        "action_color": "#2d85f3"
+      },
+      "fonts": {
+        "type": "system"
+      },
+      "show_header_avatar": true,
+      "app_avatar": "https://s3.amazonaws.com/assets.helpshift.com/supercell/avatar/cc25188f-99d1-45bd-9a98-21e1870fda1f/64.png"
+    },
+    "fast_polling_enabled": true,
+    "enable_fetch_on_signal": true,
+    "greeting": "Hi, how can we help you?",
+    "preissue_reset_interval": 86400000,
+    "spam_management_config": {
+      "spam_management_enabled": false
+    },
+    "answer_bot_feature_enabled": true,
+    "conversation_history_enabled": true,
+    "si": {
+      "enabled": true,
+      "tree_sla": 600000,
+      "model_sla": 600000
+    },
+    "translations": {
+      "reply_btn_placeholder": "Escreve a tua mensagem",
+      "close_hs_widget_vo": "Fechar o widget",
+      "end_conversation": "Esta conversa terminou",
+      "business_hours_thanks_msg": "Agradecemos o teu contacto, iremos responder em breve.",
+      "conversations_deleted": "%d conversas eliminadas",
+      "business_hours.offline_message": "Estamos offline. Por favor, tente novamente mais tarde.",
+      "separator_or": "ou",
+      "csat_bot_form_submit_btn": "Enviar",
+      "si_search_title": "Selecione a partir de problemas coincidentes",
+      "bot_form_submit_label": "Enviar",
+      "failed_to_send": "Falha ao enviar",
+      "file_name_character_length_exceeded_error": "Por favor, insira um arquivo com um nome menor que {{length}} caracteres",
+      "reply_send_button_vo": "Enviar mensagem",
+      "internet_error": "Sem conexão à internet",
+      "required_input_field_error": "Este é um campo obrigatório",
+      "dnd_info_text": "Arrasta os ficheiros para aqui",
+      "format": "Formato",
+      "select_two_star_rating_vo": "Selecionar duas estrelas",
+      "select_four_star_rating_vo": "Selecionar quatro estrelas",
+      "user_auth_failure_message_title": "Falha na autenticação",
+      "sending": "A enviar",
+      "click_to_retry_text": "Clique para tentar novamente",
+      "resolution_question": "Respondemos a todas as tuas questões? ",
+      "user_message_time_vo": "A sua mensagem, {{message}}, Enviada às {{time_and_date}}",
+      "nbh_attach_files_vo": "Anexar ficheiros",
+      "business_hours_leave_us_msg": "Deixe-nos uma mensagem",
+      "csat_five_star_vo": "Avaliar cinco estrelas",
+      "multiple_messages_notification": "{{d}}  novas mensagens do serviço de Apoio",
+      "two_star_rating_selected_vo": "Duas estrelas -  Classificação {{star_label}}",
+      "single_message_notification": "Nova mensagem do serviço de Apoio",
+      "conversation_deleted": "Conversa eliminada",
+      "business_hours_msg_placeholder": "Escreve a tua mensagem",
+      "verification_failed": "Verificação falhada",
+      "jump_new_messages_vo": "Saltar para novas mensagens",
+      "loading_messages": "A carregar mensagens...",
+      "nbh_invalid_data_vo": "Dados inválidos",
+      "attachments_deleted": "{{count}} anexos eliminados",
+      "attachment_deleted": "{{count}} anexo eliminado",
+      "faq_load_failed": "Não foi possível carregar o FAQ, por favor tente regarregar...",
+      "back_button_vo": "Voltar à conversa",
+      "si_typing_hint": "Ou digite sua mensagem",
+      "si_empty_search_title": "Sem problemas coincidentes",
+      "business_hours.offline_title": "Estamos offline",
+      "si_prompt_title": "Selecione o seu problema",
+      "no_search_results": " Nenhum resultado encontrado",
+      "csat_bot_review_title": "Feedback adicional",
+      "nbh_attachment_vo": "Anexo, {{file_name}}",
+      "preview_message_2": "Deves receber o teu reembolso dentro de 2 ou 3 dias úteis.",
+      "launcher_badge_count_vo": "{{num}} novas mensagens do apoio ao cliente",
+      "reload_page": " Por favor, recarregue a página para continuar. Desculpe pelo inconveniente!",
+      "business_hours_name_placeholder": "Introduz o teu nome",
+      "try_again_in_count_minutes": "Tente novamente em {{count}} minutos",
+      "issue_rejection_question": "Com que mais te podemos ajudar? ",
+      "user_auth_failure_message_subtitle": "Por favor, tente mais tarde",
+      "partial_attachment_limit_reached_plural": "Pode carregar um máximo de {{count}} ficheiros adicionais, cada um com um máximo de 20 MB.",
+      "si_typing_hint_eis": "Pesquise o seu problema",
+      "collapse_search_vo": "Fechar pesquisa",
+      "login_retry_attempt": "Estamos a tentar voltar a iniciar sessão.",
+      "business_hours_email_placeholder": "Introduz o teu email",
+      "start_new_conversation": "Iniciar nova conversa",
+      "business_hours_atch_limit_msg": "O anexo excede o limite máximo de 5",
+      "time_ago_just_now": "agora mesmo",
+      "liked_it": "Gostei",
+      "reopen_support_prompt": "Por favor, tente reabrir o suporte.",
+      "close_chat_vo": "Fechar chat",
+      "app_error_message_title": "Algo deu errado",
+      "atch_file_type_error": "Erro, tipo de arquivo não suportado",
+      "business_hours_msg_label": "Mensagem",
+      "its_ok": "Estava tudo bem",
+      "hated_it": "Detestei",
+      "non_blocking_error_message": "Algo deu errado. Por favor, tente recarregar",
+      "retry_attachment_vo": "Voltar a tentar enviar anexo",
+      "retry_button": " Repetir",
+      "user_message_sending_vo": "A sua mensagem, {{message}}, A enviar",
+      "attachment_label": "Anexos",
+      "email_error": "Digite um endereço de e-mail válido",
+      "atch_default_error": "Erro de carregamento.",
+      "list_picker_search_list_vo": "Lista de pesquisa",
+      "date_error": "Insira uma data válida no formato DD/MM/AAAA",
+      "nbh_attachment_removed_vo": "Anexo removido",
+      "failed_attachment_vo": "Falha do anexo",
+      "csat_one_star_vo": "Avaliar uma estrela",
+      "loading_vo": "A carregar...",
+      "select_one_star_rating_vo": "Selecionar uma estrela",
+      "one_star_rating_selected_vo": "Uma estrela -  Classificação {{star_label}}",
+      "partial_upload_failure_error": "Não foi possível carregar {{count}} ficheiros. Por favor, resolva os erros e tente carregá. los novamente.",
+      "csat_four_star_vo": "Avaliar quatro estrelas",
+      "app_error_message_subtitle": "Por favor, tente recarregar",
+      "loved_it": "Adorei",
+      "live_message_header": "Agente de atendimento",
+      "conversation_closed": "Conversa fechada",
+      "valid_number_field_error": "Introduz um número válido",
+      "support_message_name_time_vo": "Mensagem do Suporte, {{message}}, Enviada por {{agent_name}} às {{time_and_date}}",
+      "select_three_star_rating_vo": "Selecionar três estrelas",
+      "loading_messages_error_text": "Não foi possível carregar as mensagens",
+      "business_hours_email_label": "Email",
+      "support_message_time_vo": "Mensagem do Suporte, {{message}}, Enviada às {{time_and_date}}",
+      "upload_failed": "O carregamento falhou!",
+      "nbh_remove_attachment_vo": "Remover anexo",
+      "chat_vo": "Conversa",
+      "si_empty_search_desc_eis": "Desculpe, mas não conseguimos encontrar o que estava a procurar",
+      "preview_message_1": "Recebeste a minha devolução? Já passou uma semana e ainda não recebi o meu reembolso.",
+      "atch_screenshot_msg": "Anexar captura de ecrã",
+      "faq_article": "Artigo",
+      "open_chat_vo": "Abrir Conversa",
+      "atch_retry_error": "Erro de carregamento. Clique para tentar novamente.",
+      "connecting_text": "Conectando ...",
+      "csat_view_header": "Conversa connosco",
+      "disliked_it": "Não gostei",
+      "new_support_message_vo": "Nova mensagem do Suporte, {{message}}",
+      "user_attachment_time_vo": "O seu anexo, Enviado às {{time_and_date}}",
+      "back": "Voltar ",
+      "csat_bot_review_placeholder": "Deixar feedback adicional",
+      "nbh_attached_file_vo": "Ficheiro Anexado, {{file_name}}",
+      "new_support_message_name_vo": "Nova mensagem do Suporte, {{message}}, Enviada por {{agent_name}}",
+      "branding": "Desenvolvido por Helpshift",
+      "atch_upload_status": "A carregar...",
+      "attachment_limit_reached": "Pode carregar um máximo de {{count}} ficheiros, cada um com um tamanho máximo de {{size}} MB, de cada vez.",
+      "search_placeholder": "Procurar",
+      "clear_search_vo": "Limpar texto",
+      "user_image_attachment_time_vo": "Imagem enviada por você às {{time}}",
+      "open_attachment_vo": "Abrir ficheiro, {{file_name}}",
+      "si_empty_search_desc": "Envie a sua mensagem para iniciar a conversação",
+      "five_star_rating_selected_vo": "Cinco estrelas -  Classificação {{star_label}}",
+      "support_image_attachment_time_vo": "Imagem do suporte, enviada às {{time}}  ",
+      "network_error": "Erro de rede",
+      "something_went_wrong_please_try_again_later": "Algo deu errado, por favor tente novamente mais tarde",
+      "show_conversation_id_placeholder": "Conversation ID: {{issueId}}",
+      "user_attachment_uploading_vo": "O seu anexo, A carregar",
+      "support_session_expired": "A sessão de suporte expirou.",
+      "preview_message_3": "Obrigado pela tua ajuda hoje!",
+      "csat_bot_response_msg": "Obrigado pelo teu feedback!",
+      "relogin_successful": "Voltou a iniciar a sessão com sucesso.",
+      "three_star_rating_selected_vo": "Três estrelas -  Classificação {{star_label}}",
+      "jump_latest_message_vo": "Saltar para última mensagem",
+      "appearance.widget_title": "Supercell Suporte",
+      "close_conversation_btn": "Fechar",
+      "resolution_reject": "Não",
+      "support_typing_vo": "O Suporte está a escrever",
+      "csat_three_star_vo": "Avaliar três estrelas",
+      "new_conversation": "Nova conversa",
+      "greeting": " Olá, como podemos ajudar?",
+      "system_error": "Algo deu errado. Reconectando ...",
+      "four_star_rating_selected_vo": "Quatro estrelas -  Classificação {{star_label}}",
+      "business_hours.cf_message": "Nós estamos offline. Por favor, deixe-nos uma mensagem e entraremos em contato com você assim que estivermos on-line.",
+      "preparing_images": "A preparar imagens...",
+      "message_deleted": "Mensagem eliminada",
+      "business_hours_name_label": "Nome",
+      "number_error": "Insira um número válido",
+      "emoji_menu": "Menu de Emojis",
+      "csat_bot.req_msg": "Como você avaliaria sua experiência de bate-papo?",
+      "overall_ratings_selected_vo": "Classificação geral",
+      "atch_filesize_error": "O anexo excede o limite de 25 MB",
+      "chat_disabled_temporarily": "O chat está temporariamente desativado porque a verificação de spam falhou.",
+      "business_hours_atch_size_msg": "O tamanho total do anexo excede os 25 MB",
+      "business_hours_received_msg": "Recebemos a sua mensagem",
+      "resolution_accept": "Sim",
+      "partial_attachment_limit_reached_singular": "Pode carregar um máximo de mais {{count}} ficheiro, até 20MB.",
+      "skip": "Pular",
+      "select_five_star_rating_vo": "Selecionar cinco estrelas",
+      "csat_two_star_vo": "Avaliar duas estrelas",
+      "nbh_attachment_error_vo": "Erro no anexo",
+      "business_hours_submit_btn": "Enviar"
+    },
+    "wa": [
+      [
+        "application/pdf"
+      ],
+      [
+        "image/gif"
+      ],
+      [
+        "image/png"
+      ],
+      [
+        "video/3gpp"
+      ],
+      [
+        "video/mp4"
+      ],
+      [
+        "video/mpeg"
+      ],
+      [
+        "video/mpeg4"
+      ],
+      [
+        "video/quicktime"
+      ],
+      [
+        "video/webm"
+      ],
+      [
+        "video/x-flv"
+      ],
+      [
+        "image/jpeg",
+        "image/pjpeg"
+      ],
+      [
+        "video/x-ms-asf",
+        "video/x-ms-wmv"
+      ],
+      [
+        "image/bmp",
+        "image/x-ms-bmp",
+        "image/x-windows-bmp"
+      ],
+      [
+        "video/avi",
+        "video/msvideo",
+        "video/x-msvideo"
+      ]
+    ]
+  },
+  "timestamp": 1766027937858
+}

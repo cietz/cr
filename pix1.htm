@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento PIX</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+        
+        .pix-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            color: #333;
+        }
+        
+        .pix-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .pix-logo {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .pix-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #32bcad;
+        }
+        
+        .amount-display {
+            background: linear-gradient(135deg, #32bcad 0%, #2a9d8f 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .pix-code-section {
+            margin: 20px 0;
+        }
+        
+        .pix-code-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .pix-code-box {
+            background: #f5f5f5;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .pix-code-text {
+            font-family: monospace;
+            font-size: 11px;
+            word-break: break-all;
+            color: #444;
+            max-height: 60px;
+            overflow-y: auto;
+        }
+        
+        .copy-button {
+            background: linear-gradient(135deg, #32bcad 0%, #2a9d8f 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .copy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(50, 188, 173, 0.4);
+        }
+        
+        .copy-button:active {
+            transform: scale(0.98);
+        }
+        
+        .copy-button.copied {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        }
+        
+        .expiration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 12px;
+            background: #fff3cd;
+            border-radius: 10px;
+            color: #856404;
+            font-size: 14px;
+        }
+        
+        .expiration-icon {
+            font-size: 18px;
+        }
+        
+        .status-section {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #e8f4f8;
+        }
+        
+        .status-text {
+            font-size: 14px;
+            color: #0369a1;
+        }
+        
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #e0e0e0;
+            border-top-color: #32bcad;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .back-button:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .loading-state {
+            padding: 40px 20px;
+        }
+        
+        .loading-state .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border-width: 4px;
+        }
+        
+        .loading-text {
+            margin-top: 20px;
+            color: #666;
+        }
+
+        /* Items list */
+        .items-summary {
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f8f8;
+            border-radius: 10px;
+        }
+        
+        .items-summary h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .item-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="pix-container" id="pix-container">
+    <!-- Loading State -->
+    <div class="loading-state" id="loading-state">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Gerando seu PIX...</div>
+    </div>
+    
+    <!-- PIX Content (hidden initially) -->
+    <div id="pix-content" style="display: none;">
+        <div class="pix-header">
+            <img src="pix-icon.png" alt="PIX" class="pix-logo">
+            <h1>Pagamento PIX</h1>
+        </div>
+        
+        <div class="amount-display" id="amount-display">
+            R$ 0,00
+        </div>
+        
+        <div class="items-summary" id="items-summary">
+            <h3>📦 Itens do pedido</h3>
+            <div id="items-list"></div>
+        </div>
+        
+        <div class="qr-container">
+            <div class="qr-code" id="qr-code">
+                <span style="color: #999;">Carregando...</span>
+            </div>
+        </div>
+        
+        <div class="pix-code-section">
+            <div class="pix-code-label">Ou copie o código PIX:</div>
+            <div class="pix-code-box">
+                <div class="pix-code-text" id="pix-code-text">
+                    Carregando código...
+                </div>
+            </div>
+            <button class="copy-button" id="copy-button" onclick="copyPixCode()">
+                📋 Copiar código PIX
+            </button>
+        </div>
+        
+        <div class="expiration" id="expiration">
+            <span class="expiration-icon">⏰</span>
+            <span>Válido até: <strong id="expiration-date">--</strong></span>
+        </div>
+        
+        <div class="status-section">
+            <div class="status-text">
+                <span class="loading-spinner"></span>
+                Aguardando pagamento...
+            </div>
+        </div>
+        
+        <a href="checkout.html" class="back-button">← Voltar ao checkout</a>
+    </div>
+    
+    <!-- Error State -->
+    <div id="error-state" style="display: none;">
+        <div class="error-message" id="error-message">
+            Erro ao gerar PIX
+        </div>
+        <a href="checkout.html" class="back-button">← Voltar ao checkout</a>
+    </div>
+</div>
+
+<script>
+// QR Code Generator (usando biblioteca externa via CDN ou gerando via API)
+const QR_API = 'https://api.qrserver.com/v1/create-qr-code/';
+
+let pixCode = '';
+
+async function initPix() {
+    const loadingState = document.getElementById('loading-state');
+    const pixContent = document.getElementById('pix-content');
+    const errorState = document.getElementById('error-state');
+    
+    try {
+        // Carrega dados do carrinho
+        const cart = JSON.parse(localStorage.getItem('scCart') || '[]');
+        
+        if (cart.length === 0) {
+            throw new Error('Carrinho vazio');
+        }
+        
+        // Calcula total
+        let total = 0;
+        const items = cart.map(item => {
+            const qty = item.qty || 1;
+            const price = parsePrice(item.price);
+            total += price * qty;
+            return {
+                title: item.name,
+                quantity: qty,
+                tangible: true,
+                unitPrice: Math.round(price * 100)
+            };
+        });
+        
+        // Formata valor para exibição
+        const formattedTotal = formatPrice(total);
+        document.getElementById('amount-display').textContent = formattedTotal;
+        
+        // Exibe lista de itens
+        const itemsListEl = document.getElementById('items-list');
+        itemsListEl.innerHTML = cart.map(item => {
+            const qty = item.qty || 1;
+            return `<div class="item-row"><span>${qty}x ${item.name}</span></div>`;
+        }).join('');
+        
+        // Dados do jogador (para identificação)
+        const playerData = JSON.parse(localStorage.getItem('crPlayerData') || 'null');
+        
+        // Prepara dados do cliente
+        const customer = {
+            name: playerData?.name || 'Cliente',
+            email: 'cliente@clash.com',
+            phone: '11999999999',
+            document: {
+                type: 'cpf',
+                number: '00000000000'
+            }
+        };
+        
+        // Chama API para criar PIX
+        const response = await fetch('/api/create-pix', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: total,
+                customer: customer,
+                items: items
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok || !data.success) {
+            throw new Error(data.error || 'Falha ao criar PIX');
+        }
+        
+        // Sucesso! Exibe o PIX
+        pixCode = data.pix?.qrcode || '';
+        
+        // Gera QR Code
+        if (pixCode) {
+            const qrImageUrl = `${QR_API}?size=200x200&data=${encodeURIComponent(pixCode)}`;
+            document.getElementById('qr-code').innerHTML = `<img src="${qrImageUrl}" alt="QR Code PIX">`;
+            document.getElementById('pix-code-text').textContent = pixCode;
+        } else {
+            document.getElementById('qr-code').innerHTML = '<span style="color: #999;">QR Code indisponível</span>';
+            document.getElementById('pix-code-text').textContent = 'Código não disponível';
+        }
+        
+        // Data de expiração
+        if (data.expirationDate) {
+            const expDate = new Date(data.expirationDate);
+            document.getElementById('expiration-date').textContent = expDate.toLocaleDateString('pt-BR');
+        } else {
+            document.getElementById('expiration').style.display = 'none';
+        }
+        
+        // Mostra conteúdo
+        loadingState.style.display = 'none';
+        pixContent.style.display = 'block';
+        
+    } catch (error) {
+        console.error('Erro ao gerar PIX:', error);
+        loadingState.style.display = 'none';
+        document.getElementById('error-message').textContent = error.message || 'Erro ao gerar PIX';
+        errorState.style.display = 'block';
+    }
+}
+
+function parsePrice(priceStr) {
+    if (typeof priceStr === 'number') return priceStr;
+    const match = priceStr.match(/[\d.,]+/);
+    if (!match) return 0;
+    return parseFloat(match[0].replace('.', '').replace(',', '.'));
+}
+
+function formatPrice(value) {
+    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+function copyPixCode() {
+    if (!pixCode) return;
+    
+    navigator.clipboard.writeText(pixCode).then(() => {
+        const btn = document.getElementById('copy-button');
+        btn.textContent = '✅ Código copiado!';
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+            btn.textContent = '📋 Copiar código PIX';
+            btn.classList.remove('copied');
+        }, 3000);
+    }).catch(err => {
+        console.error('Erro ao copiar:', err);
+        // Fallback para navegadores antigos
+        const textarea = document.createElement('textarea');
+        textarea.value = pixCode;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        const btn = document.getElementById('copy-button');
+        btn.textContent = '✅ Código copiado!';
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+            btn.textContent = '📋 Copiar código PIX';
+            btn.classList.remove('copied');
+        }, 3000);
+    });
+}
+
+// Inicia quando a página carrega
+document.addEventListener('DOMContentLoaded', initPix);
+</script>
+
+</body>
+</html>

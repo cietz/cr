@@ -1,0 +1,19 @@
+{
+  "url": "https://o315582.ingest.us.sentry.io/api/5962619/envelope/?sentry_version=7&sentry_key=ea3492c3b6144f7cb83fe9bd3194bfc5&sentry_client=sentry.javascript.nextjs%2F10.27.0",
+  "status": 200,
+  "headers": {
+    "access-control-allow-origin": "*",
+    "access-control-expose-headers": "x-sentry-error,x-sentry-rate-limits,retry-after",
+    "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+    "content-length": "2",
+    "content-type": "application/json",
+    "cross-origin-resource-policy": "cross-origin",
+    "date": "Thu, 18 Dec 2025 03:17:27 GMT",
+    "server": "nginx",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "vary": "origin, access-control-request-method, access-control-request-headers",
+    "via": "1.1 google"
+  },
+  "data": {},
+  "timestamp": 1766027936079
+}

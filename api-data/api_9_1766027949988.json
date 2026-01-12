@@ -1,0 +1,18 @@
+{
+  "url": "https://api.helpshift.com/events/v1/supercell/websdk/",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "true",
+    "access-control-allow-headers": "Accept,Authorization,Content-Type,Keep-Alive,Origin,User-Agent,X-Requested-With,X-Hs-Access-Token\nAccept,Authorization,Content-Type,Keep-Alive,Origin,User-Agent,X-Requested-With,X-Hs-Access-Token,X-Hs-Signature",
+    "access-control-allow-methods": "GET, POST, PUT, OPTIONS",
+    "content-length": "10",
+    "content-type": "application/json",
+    "date": "Thu, 18 Dec 2025 03:17:30 GMT",
+    "server": "nginx",
+    "vary": "Origin"
+  },
+  "data": {
+    "ok": "1"
+  },
+  "timestamp": 1766027937995
+}

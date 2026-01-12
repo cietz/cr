@@ -1,0 +1,61 @@
+# Arquivos e pastas a serem ignorados no deploy da SquareCloud
+
+# Node modules (será instalado automaticamente)
+
+node_modules/
+
+# Documentação (não necessária em produção)
+
+\*.md
+!README.md
+
+# Arquivos de teste
+
+test-utmify.js
+
+# Exemplos
+
+utmify-examples.js
+
+# Git
+
+.git/
+.gitignore
+
+# Ambiente local
+
+.env.local
+.env.development
+
+# Logs
+
+logs/
+\*.log
+
+# Cache
+
+.cache/
+.DS_Store
+Thumbs.db
+
+# IDE
+
+.vscode/
+.idea/
+_.swp
+_.swo
+
+# Build outputs locais
+
+dist/
+build/
+
+# Arquivos temporários
+
+tmp/
+temp/
+
+# Backup
+
+_.backup
+_.bak

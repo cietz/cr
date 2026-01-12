@@ -1,0 +1,67 @@
+[
+  {
+    "url": "https://cdn.supercell.com/onetrust/supercell/feature-flag.json",
+    "file": "api_0_1766027949978.json",
+    "timestamp": 1766027936051
+  },
+  {
+    "url": "https://o315582.ingest.us.sentry.io/api/5962619/envelope/?sentry_version=7&sentry_key=ea3492c3b6144f7cb83fe9bd3194bfc5&sentry_client=sentry.javascript.nextjs%2F10.27.0",
+    "file": "api_1_1766027949979.json",
+    "timestamp": 1766027936079
+  },
+  {
+    "url": "https://accounts.supercell.com/oauth/sso/validate",
+    "file": "api_2_1766027949979.json",
+    "timestamp": 1766027945096
+  },
+  {
+    "url": "https://store.supercell.com/api/v3/clashroyale/bonus/status",
+    "file": "api_3_1766027949980.json",
+    "timestamp": 1766027936448
+  },
+  {
+    "url": "https://cdn.cookielaw.org/consent/010ca8c2-5d7a-43f5-ac8f-8c0d21467334/010ca8c2-5d7a-43f5-ac8f-8c0d21467334.json",
+    "file": "api_4_1766027949981.json",
+    "timestamp": 1766027936450
+  },
+  {
+    "url": "https://cdn.cookielaw.org/consent/010ca8c2-5d7a-43f5-ac8f-8c0d21467334/0196f1cf-e35b-7faf-b7e6-0fb89a8cdeb2/pt.json",
+    "file": "api_5_1766027949982.json",
+    "timestamp": 1766027936594
+  },
+  {
+    "url": "https://cdn.cookielaw.org/scripttemplates/202401.2.0/assets/otFlat.json",
+    "file": "api_6_1766027949984.json",
+    "timestamp": 1766027936599
+  },
+  {
+    "url": "https://cdn.cookielaw.org/scripttemplates/202401.2.0/assets/v2/otPcCenter.json",
+    "file": "api_7_1766027949985.json",
+    "timestamp": 1766027936623
+  },
+  {
+    "url": "https://api.helpshift.com/websdk/supercell/config?did=anonymous&platform-id=supercell_platform&uid=anonymous&user_auth_token=anonymous&nonce=0",
+    "file": "api_8_1766027949987.json",
+    "timestamp": 1766027937858
+  },
+  {
+    "url": "https://api.helpshift.com/events/v1/supercell/websdk/",
+    "file": "api_9_1766027949988.json",
+    "timestamp": 1766027937995
+  },
+  {
+    "url": "https://api.helpshift.com/events/v1/supercell/logs/websdk/performance",
+    "file": "api_10_1766027949991.json",
+    "timestamp": 1766027938060
+  },
+  {
+    "url": "https://api.helpshift.com/websdk/supercell/intent-trees?did=anonymous&platform-id=supercell_platform&uid=anonymous&user_auth_token=anonymous",
+    "file": "api_11_1766027949992.json",
+    "timestamp": 1766027938510
+  },
+  {
+    "url": "https://api.helpshift.com/websdk/supercell/config?did=anonymous&platform-id=supercell_platform&uid=anonymous&user_auth_token=anonymous&nonce=0",
+    "file": "api_12_1766027949993.json",
+    "timestamp": 1766027938510
+  }
+]

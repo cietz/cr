@@ -1,0 +1,63 @@
+{
+  "url": "https://api.helpshift.com/websdk/supercell/intent-trees?did=anonymous&platform-id=supercell_platform&uid=anonymous&user_auth_token=anonymous",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "true",
+    "access-control-allow-headers": "Accept,Authorization,Content-Type,Keep-Alive,Origin,User-Agent,X-Requested-With,X-Hs-Access-Token,X-Hs-Signature",
+    "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "access-control-max-age": "86400",
+    "content-length": "793",
+    "content-type": "application/json;charset=utf-8",
+    "date": "Thu, 18 Dec 2025 03:17:30 GMT",
+    "etag": "W/b7162a9f2d05c2173a5c460b11467adf4def06e3",
+    "server": "nginx",
+    "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+    "vary": "Origin",
+    "x-content-type-options": "nosniff",
+    "x-hs-request-id": "e3e2cb74-1295-4a85-aaa1-e728fc962f53",
+    "x-xss-protection": "1; mode=block"
+  },
+  "data": {
+    "id": "supercell_intent_menu_20240627065516028-935c1d74d41be7a",
+    "version": 10,
+    "updated_at": 1764314493458,
+    "token_delimiters": [
+      " ",
+      ",",
+      "?",
+      "!",
+      "."
+    ],
+    "eis": false,
+    "tree": [
+      {
+        "id": "supercell_intent_group_20240627064405529-9d504c7c52373ed",
+        "label": "Supercell Store",
+        "show_by_default": true,
+        "children": [
+          {
+            "id": "supercell_intent_20240627065639162-2be95a500301b6c",
+            "label": "Quais métodos de pagamento posso usar?",
+            "show_by_default": true
+          },
+          {
+            "id": "supercell_intent_20240628070546310-97f04f16a50f7ac",
+            "label": "Meu pedido não foi aceito",
+            "show_by_default": true
+          },
+          {
+            "id": "supercell_intent_20240627065654569-70d34f0a30b5e0b",
+            "label": "Outros problemas na compra",
+            "show_by_default": true
+          },
+          {
+            "id": "supercell_intent_20241007080006383-15563c1ae61bdfa",
+            "label": "Posso trocar a moeda ou o país?",
+            "show_by_default": true
+          }
+        ]
+      }
+    ]
+  },
+  "timestamp": 1766027938510
+}

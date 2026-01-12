@@ -1,0 +1,16 @@
+{
+  "url": "https://api.helpshift.com/events/v1/supercell/logs/websdk/performance",
+  "status": 401,
+  "headers": {
+    "access-control-allow-headers": "Accept,Authorization,Content-Type,Keep-Alive,Origin,User-Agent,X-Requested-With,X-Hs-Access-Token",
+    "content-length": "27",
+    "content-type": "application/json",
+    "date": "Thu, 18 Dec 2025 03:17:30 GMT",
+    "server": "nginx",
+    "vary": "Origin"
+  },
+  "data": {
+    "error": "Not Authorized."
+  },
+  "timestamp": 1766027938060
+}

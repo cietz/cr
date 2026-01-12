@@ -1,0 +1,21 @@
+{
+  "url": "https://accounts.supercell.com/oauth/sso/validate",
+  "status": 400,
+  "headers": {
+    "cache-control": "max-age=0, no-cache, must-revalidate, proxy-revalidate",
+    "content-length": "34",
+    "content-type": "application/json",
+    "date": "Thu, 18 Dec 2025 03:17:37 GMT",
+    "vary": "origin",
+    "via": "1.1 43e4cc214a573d4a043c2ab8f77b53e8.cloudfront.net (CloudFront)",
+    "x-amz-cf-id": "XUsQwXd2YMzxUNnaomas0_BqVO3UQ57GOUGHtrw4ulOGJg0PFKeG9g==",
+    "x-amz-cf-pop": "GRU1-P2",
+    "x-cache": "Error from cloudfront",
+    "x-supercell-correlation-id": "c370f6a4d7d347e9b7e13eff32517f35"
+  },
+  "data": {
+    "ok": false,
+    "error": "bad_request"
+  },
+  "timestamp": 1766027945096
+}
