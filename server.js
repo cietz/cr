@@ -76,11 +76,15 @@ app.get("/player", async (req, res) => {
     return res.status(400).json({ error: "Tag é obrigatória" });
   }
 
-  const apiToken = process.env.CR_API_TOKEN;
+  // Limpa o token removendo espaços, quebras de linha e caracteres inválidos
+  const rawToken = process.env.CR_API_TOKEN || "";
+  const apiToken = rawToken.trim().replace(/[\r\n\t]/g, "");
 
   // Se não tiver token configurado, retorna dados mockados
-  if (!apiToken || apiToken === "seu_token_aqui") {
-    console.log("⚠️ CR_API_TOKEN não configurado, usando dados mockados");
+  if (!apiToken || apiToken === "seu_token_aqui" || apiToken.length < 50) {
+    console.log(
+      "⚠️ CR_API_TOKEN não configurado ou inválido, usando dados mockados"
+    );
     return res.json({
       tag: tag,
       name: "Jogador Demo",
@@ -101,14 +105,16 @@ app.get("/player", async (req, res) => {
   try {
     const fetch = (...args) =>
       import("node-fetch").then(({ default: fetch }) => fetch(...args));
-    const cleanTag = tag.replace("#", "");
+    const cleanTag = tag.replace("#", "").replace("%23", "");
     const apiUrl = `https://api.clashroyale.com/v1/players/%23${cleanTag}`;
 
     console.log(`🎮 Buscando jogador na API real: ${cleanTag}`);
+    console.log(`🔑 Token length: ${apiToken.length} chars`);
 
     const response = await fetch(apiUrl, {
+      method: "GET",
       headers: {
-        Authorization: `Bearer ${apiToken}`,
+        Authorization: "Bearer " + apiToken,
         Accept: "application/json",
       },
     });
