@@ -661,8 +661,8 @@
             
             const totalInCents = Math.round(total * 100);
             
-            // Envia através do proxy backend (porta 3001)
-            const response = await fetch('http://localhost:3001/api/utmify/order', {
+            // Envia através do proxy backend (mesmo servidor)
+            const response = await fetch('/api/utmify/order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -158,6 +158,25 @@ app.get("/health", (req, res) => {
   });
 });
 
+// Rota para descobrir o IP público do servidor
+app.get("/get-ip", async (req, res) => {
+  try {
+    const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    res.json({
+      ip: data.ip,
+      message: '🎯 Use este IP na API do Clash Royale: developer.clashroyale.com',
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      error: error.message,
+      message: 'Tente acessar https://api.ipify.org manualmente'
+    });
+  }
+});
+
 // ==========================================
 // INICIA SERVIDOR
 // ==========================================
