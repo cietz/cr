@@ -1,6 +1,6 @@
 /**
- * Servidor Principal para SquareCloud
- * Inicia ambos os servidores (mock-server e utmify-proxy) em um único processo
+ * Servidor Principal para Railway/SquareCloud
+ * Servidor unificado com todas as funcionalidades
  */
 
 const express = require("express");
@@ -8,17 +8,16 @@ const path = require("path");
 const fs = require("fs");
 const cors = require("cors");
 
-// Importa o servidor UTMify
-const utmifyApp = require("./utmify-proxy-server");
+// Importa as rotas do UTMify (não inicia servidor separado)
+const utmifyRouter = require("./utmify-proxy-server");
 
 // ==========================================
 // CONFIGURAÇÃO
 // ==========================================
-const PORT = process.env.PORT || 80;
-const UTMIFY_PORT = process.env.UTMIFY_PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 // ==========================================
-// SERVIDOR PRINCIPAL (Mock Server)
+// SERVIDOR PRINCIPAL
 // ==========================================
 const app = express();
 
@@ -88,6 +87,9 @@ if (fs.existsSync(apiDataPath)) {
   }
 }
 
+// Monta as rotas do UTMify no servidor principal
+app.use(utmifyRouter);
+
 // Rota de saúde para Railway
 app.get("/health", (req, res) => {
   res.status(200).json({
@@ -95,26 +97,18 @@ app.get("/health", (req, res) => {
     service: "Clash Royale Store",
     timestamp: new Date().toISOString(),
     port: PORT,
-    utmifyProxy: `Running on port ${UTMIFY_PORT}`,
   });
 });
 
 // ==========================================
-// INICIA SERVIDORES
+// INICIA SERVIDOR
 // ==========================================
 app.listen(PORT, "0.0.0.0", () => {
   console.log("🎮 Clash Royale Store rodando na porta", PORT);
-  console.log("📊 UTMify Proxy rodando na porta", UTMIFY_PORT);
+  console.log("📊 UTMify Proxy integrado no mesmo servidor");
   console.log("🌐 Ambiente:", process.env.NODE_ENV || "development");
   console.log("✅ Servidor pronto e aceitando conexões!");
   console.log("🏥 Healthcheck disponível em /health");
 });
-
-// Inicia servidor UTMify na porta configurada
-if (UTMIFY_PORT !== PORT) {
-  utmifyApp.listen(UTMIFY_PORT, () => {
-    console.log("📊 Servidor UTMify iniciado na porta", UTMIFY_PORT);
-  });
-}
 
 module.exports = app;

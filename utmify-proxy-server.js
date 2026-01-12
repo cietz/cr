@@ -247,16 +247,18 @@ function formatDateUTC(date) {
 }
 
 // ============================================
-// START SERVER
+// START SERVER (apenas se executado diretamente)
 // ============================================
-app.listen(PORT, () => {
-  console.log("🚀 Servidor Utmify Proxy rodando na porta", PORT);
-  console.log("📊 Platform:", UTMIFY_CONFIG.platform);
-  console.log(
-    "🔑 API Token configurado:",
-    UTMIFY_CONFIG.apiToken ? "Sim" : "Não"
-  );
-  console.log("⚠️  Lembre-se de configurar a variável UTMIFY_API_TOKEN");
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log("🚀 Servidor Utmify Proxy rodando na porta", PORT);
+    console.log("📊 Platform:", UTMIFY_CONFIG.platform);
+    console.log(
+      "🔑 API Token configurado:",
+      UTMIFY_CONFIG.apiToken ? "Sim" : "Não"
+    );
+    console.log("⚠️  Lembre-se de configurar a variável UTMIFY_API_TOKEN");
+  });
+}
 
 module.exports = app;
