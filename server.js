@@ -206,16 +206,15 @@ app.post("/api/create-pix", async (req, res) => {
       items:
         items && items.length > 0
           ? items.map((item) => ({
-              name: item.title || item.name || "Produto Clash Royale",
+              title: item.title || item.name || "Produto Clash Royale",
               quantity: item.quantity || item.qty || 1,
-              // unitPrice já vem em centavos do checkout
               unitPrice:
                 item.unitPrice || Math.round((item.price || 100) * 100),
               tangible: item.tangible !== undefined ? item.tangible : false,
             }))
           : [
               {
-                name: "Produto Clash Royale",
+                title: "Produto Clash Royale",
                 quantity: 1,
                 unitPrice: amountInCents,
                 tangible: false,
@@ -232,13 +231,7 @@ app.post("/api/create-pix", async (req, res) => {
             "00000000000"
           ).replace(/\D/g, ""),
         },
-        phone: {
-          countryCode: "55",
-          areaCode: (customer?.phone || "11999999999").substring(0, 2),
-          number: (customer?.phone || "11999999999")
-            .substring(2)
-            .replace(/\D/g, ""),
-        },
+        phone: (customer?.phone || "11999999999").replace(/\D/g, ""),
       },
     };
 
