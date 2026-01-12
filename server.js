@@ -166,69 +166,120 @@ app.get("/player", async (req, res) => {
   }
 });
 
-// API mock para criar PIX
-app.post("/api/create-pix", (req, res) => {
+// API para criar PIX usando Marchabb
+app.post("/api/create-pix", async (req, res) => {
   const { amount, customer, items } = req.body;
 
-  // Gera um UUID único para o PIX
-  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-    /[xy]/g,
-    function (c) {
-      const r = (Math.random() * 16) | 0;
-      const v = c === "x" ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    }
-  );
+  // Credenciais da Marchabb (definir nas variáveis de ambiente)
+  const publicKey = process.env.MARCHABB_PUBLIC_KEY || "";
+  const secretKey = process.env.MARCHABB_SECRET_KEY || "";
 
-  // URL do PIX no formato correto
-  const pixUrl = `qrcode.a55scd.com.br/pix/${uuid}`;
-
-  // Formata o valor com 2 casas decimais
-  const formattedAmount = (amount || 0).toFixed(2);
-
-  // Gera o código PIX no formato BRCode EMV correto
-  // Formato: 00020101021226830014br.gov.bcb.pix2561{url}5204000053039865802BR5909{nome}6008{cidade}61080331101062070503***6304{crc}
-  const pixPayload = `00020101021226${(14 + pixUrl.length)
-    .toString()
-    .padStart(2, "0")}0014br.gov.bcb.pix25${pixUrl.length
-    .toString()
-    .padStart(
-      2,
-      "0"
-    )}${pixUrl}5204000053039865802BR5909VITALCRED6008SAOPAULO61080331101062070503***6304`;
-
-  // Calcula CRC16 para validar o código
-  const crc = calculateCRC16(pixPayload);
-  const pixCode = pixPayload + crc;
-
-  res.json({
-    success: true,
-    pix: {
-      qrcode: pixCode,
-    },
-    transactionId: `TX-${Date.now()}`,
-    expirationDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-  });
-});
-
-// Função para calcular CRC16 CCITT-FALSE (padrão PIX)
-function calculateCRC16(payload) {
-  const polynomial = 0x1021;
-  let crc = 0xffff;
-
-  for (let i = 0; i < payload.length; i++) {
-    crc ^= payload.charCodeAt(i) << 8;
-    for (let j = 0; j < 8; j++) {
-      if ((crc & 0x8000) !== 0) {
-        crc = ((crc << 1) ^ polynomial) & 0xffff;
-      } else {
-        crc = (crc << 1) & 0xffff;
-      }
-    }
+  // Se não tiver credenciais, retorna erro
+  if (!publicKey || !secretKey) {
+    console.error("Credenciais Marchabb não configuradas");
+    return res.status(500).json({
+      success: false,
+      error: "Gateway de pagamento não configurado",
+    });
   }
 
-  return crc.toString(16).toUpperCase().padStart(4, "0");
-}
+  try {
+    // Monta a autenticação Basic
+    const auth =
+      "Basic " + Buffer.from(publicKey + ":" + secretKey).toString("base64");
+
+    // Monta o payload conforme documentação Marchabb
+    const payload = {
+      amount: Math.round(amount * 100), // Valor em centavos
+      paymentMethod: "pix",
+      pix: {
+        expiresInDays: 1, // PIX expira em 1 dia
+      },
+      items:
+        items && items.length > 0
+          ? items.map((item) => ({
+              name: item.name || "Produto Clash Royale",
+              quantity: item.quantity || 1,
+              unitPrice: Math.round((item.price || amount) * 100), // Preço em centavos
+              tangible: false, // Produto digital
+            }))
+          : [
+              {
+                name: "Produto Clash Royale",
+                quantity: 1,
+                unitPrice: Math.round(amount * 100),
+                tangible: false,
+              },
+            ],
+      customer: {
+        name: customer?.name || "Cliente",
+        email: customer?.email || "cliente@email.com",
+        document: {
+          type: "cpf",
+          number: customer?.cpf?.replace(/\D/g, "") || "00000000000",
+        },
+        phone: {
+          countryCode: "55",
+          areaCode: customer?.phone?.substring(0, 2) || "11",
+          number:
+            customer?.phone?.substring(2)?.replace(/\D/g, "") || "999999999",
+        },
+      },
+      metadata: JSON.stringify({
+        source: "clash-royale-store",
+        timestamp: Date.now(),
+      }),
+    };
+
+    console.log(
+      "Enviando requisição para Marchabb:",
+      JSON.stringify(payload, null, 2)
+    );
+
+    // Faz a requisição para a API Marchabb
+    const response = await fetch("https://api.marchabb.com/v1/transactions", {
+      method: "POST",
+      headers: {
+        Authorization: auth,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+    console.log("Resposta Marchabb:", JSON.stringify(data, null, 2));
+
+    if (!response.ok) {
+      console.error("Erro Marchabb:", data);
+      return res.status(response.status).json({
+        success: false,
+        error: data.message || "Erro ao criar PIX",
+        details: data,
+      });
+    }
+
+    // Retorna os dados do PIX
+    res.json({
+      success: true,
+      pix: {
+        qrcode: data.pix?.qrCode || data.pix?.qrcode || data.pixQrCode,
+        qrcodeImage: data.pix?.qrCodeImage || data.pix?.qrcodeImage,
+        copyPaste: data.pix?.copyAndPaste || data.pix?.brcode,
+      },
+      transactionId: data.id || data.transactionId,
+      expirationDate: data.pix?.expiresAt || data.expirationDate,
+      status: data.status,
+    });
+  } catch (error) {
+    console.error("Erro ao criar PIX:", error);
+    res.status(500).json({
+      success: false,
+      error: "Erro interno ao processar pagamento",
+      details: error.message,
+    });
+  }
+});
 
 // Carrega dados mockados da API
 const apiDataPath = path.join(__dirname, "api-data");
