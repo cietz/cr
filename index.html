@@ -5222,6 +5222,19 @@
       .ot-floating-button__front {
         background-image: url("https://cdn.cookielaw.org/logos/static/ot_persistent_cookie.png");
       }
+      
+      /* FIX: Corrigir truncamento de títulos nos cards */
+      .ClashRoyaleStoreSpecialHeading_RowContainer___8tO0 h3,
+      h3.storeTypography_textBase__B5TeC,
+      h3[class*='storeTypography'] {
+        overflow: visible !important;
+        white-space: normal !important;
+        text-overflow: clip !important;
+        max-width: 100% !important;
+        line-height: 1.2 !important;
+        word-wrap: break-word !important;
+        display: block !important;
+      }
     </style>
     <script
       async=""
