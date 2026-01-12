@@ -1,5 +1,9 @@
 {
-  "styles": [],
+  "styles": [
+    ".card-product-title { overflow: visible !important; white-space: normal !important; text-overflow: clip !important; max-width: 100% !important; }",
+    "h3[class*='storeTypography'] { overflow: visible !important; white-space: normal !important; text-overflow: clip !important; max-width: 100% !important; line-height: 1.2 !important; }",
+    ".ClashRoyaleStoreSpecialHeading_RowContainer___8tO0 h3 { overflow: visible !important; white-space: normal !important; word-wrap: break-word !important; }"
+  ],
   "gameTheme": "#0f377d",
   "bodyClasses": "overflow-hidden"
 }
