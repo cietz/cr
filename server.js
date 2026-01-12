@@ -170,10 +170,36 @@ app.get("/player", async (req, res) => {
 app.post("/api/create-pix", (req, res) => {
   const { amount, customer, items } = req.body;
 
-  // Simula geração de PIX
-  const pixCode = `00020126580014br.gov.bcb.pix0136${Date.now()}520400005303986540${amount.toFixed(
-    2
-  )}5802BR5925CLASH ROYALE STORE6009SAO PAULO62070503***6304`;
+  // Gera um UUID único para o PIX
+  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function (c) {
+      const r = (Math.random() * 16) | 0;
+      const v = c === "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    }
+  );
+
+  // URL do PIX no formato correto
+  const pixUrl = `qrcode.a55scd.com.br/pix/${uuid}`;
+
+  // Formata o valor com 2 casas decimais
+  const formattedAmount = (amount || 0).toFixed(2);
+
+  // Gera o código PIX no formato BRCode EMV correto
+  // Formato: 00020101021226830014br.gov.bcb.pix2561{url}5204000053039865802BR5909{nome}6008{cidade}61080331101062070503***6304{crc}
+  const pixPayload = `00020101021226${(14 + pixUrl.length)
+    .toString()
+    .padStart(2, "0")}0014br.gov.bcb.pix25${pixUrl.length
+    .toString()
+    .padStart(
+      2,
+      "0"
+    )}${pixUrl}5204000053039865802BR5909VITALCRED6008SAOPAULO61080331101062070503***6304`;
+
+  // Calcula CRC16 para validar o código
+  const crc = calculateCRC16(pixPayload);
+  const pixCode = pixPayload + crc;
 
   res.json({
     success: true,
@@ -184,6 +210,25 @@ app.post("/api/create-pix", (req, res) => {
     expirationDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
   });
 });
+
+// Função para calcular CRC16 CCITT-FALSE (padrão PIX)
+function calculateCRC16(payload) {
+  const polynomial = 0x1021;
+  let crc = 0xffff;
+
+  for (let i = 0; i < payload.length; i++) {
+    crc ^= payload.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) {
+      if ((crc & 0x8000) !== 0) {
+        crc = ((crc << 1) ^ polynomial) & 0xffff;
+      } else {
+        crc = (crc << 1) & 0xffff;
+      }
+    }
+  }
+
+  return crc.toString(16).toUpperCase().padStart(4, "0");
+}
 
 // Carrega dados mockados da API
 const apiDataPath = path.join(__dirname, "api-data");
