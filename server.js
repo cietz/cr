@@ -69,27 +69,95 @@ app.get("/checkout", (req, res) => {
   res.sendFile(path.join(__dirname, "checkout.html"));
 });
 
-// Rota para player API (mock)
-app.get("/player", (req, res) => {
+// Rota para player API (real ou mock)
+app.get("/player", async (req, res) => {
   const tag = req.query.tag;
   if (!tag) {
     return res.status(400).json({ error: "Tag é obrigatória" });
   }
 
-  // Retorna dados mockados do jogador
-  res.json({
-    tag: tag,
-    name: "Jogador Demo",
-    expLevel: 50,
-    trophies: 6500,
-    bestTrophies: 7200,
-    wins: 1500,
-    losses: 800,
-    clan: {
-      tag: "#CLAN123",
-      name: "Clash Royale BR",
-    },
-  });
+  const apiToken = process.env.CR_API_TOKEN;
+
+  // Se não tiver token configurado, retorna dados mockados
+  if (!apiToken || apiToken === "seu_token_aqui") {
+    console.log("⚠️ CR_API_TOKEN não configurado, usando dados mockados");
+    return res.json({
+      tag: tag,
+      name: "Jogador Demo",
+      expLevel: 50,
+      trophies: 6500,
+      bestTrophies: 7200,
+      wins: 1500,
+      losses: 800,
+      clan: {
+        tag: "#CLAN123",
+        name: "Clash Royale BR",
+      },
+      _mock: true,
+    });
+  }
+
+  // Chamada real à API do Clash Royale
+  try {
+    const fetch = (...args) =>
+      import("node-fetch").then(({ default: fetch }) => fetch(...args));
+    const cleanTag = tag.replace("#", "");
+    const apiUrl = `https://api.clashroyale.com/v1/players/%23${cleanTag}`;
+
+    console.log(`🎮 Buscando jogador na API real: ${cleanTag}`);
+
+    const response = await fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${apiToken}`,
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("❌ Erro API Clash Royale:", response.status, errorText);
+
+      // Se falhar, retorna mock como fallback
+      return res.json({
+        tag: tag,
+        name: "Jogador Demo",
+        expLevel: 50,
+        trophies: 6500,
+        bestTrophies: 7200,
+        wins: 1500,
+        losses: 800,
+        clan: {
+          tag: "#CLAN123",
+          name: "Clash Royale BR",
+        },
+        _mock: true,
+        _error: `API error: ${response.status}`,
+      });
+    }
+
+    const data = await response.json();
+    console.log("✅ Dados reais recebidos da API Clash Royale");
+    return res.json(data);
+  } catch (error) {
+    console.error("❌ Erro ao buscar jogador:", error.message);
+
+    // Se der erro, retorna mock como fallback
+    return res.json({
+      tag: tag,
+      name: "Jogador Demo",
+      expLevel: 50,
+      trophies: 6500,
+      bestTrophies: 7200,
+      wins: 1500,
+      losses: 800,
+      clan: {
+        tag: "#CLAN123",
+        name: "Clash Royale BR",
+      },
+      _mock: true,
+      _error: error.message,
+    });
+  }
 });
 
 // API mock para criar PIX
@@ -161,18 +229,20 @@ app.get("/health", (req, res) => {
 // Rota para descobrir o IP público do servidor
 app.get("/get-ip", async (req, res) => {
   try {
-    const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-    const response = await fetch('https://api.ipify.org?format=json');
+    const fetch = (...args) =>
+      import("node-fetch").then(({ default: fetch }) => fetch(...args));
+    const response = await fetch("https://api.ipify.org?format=json");
     const data = await response.json();
     res.json({
       ip: data.ip,
-      message: '🎯 Use este IP na API do Clash Royale: developer.clashroyale.com',
-      timestamp: new Date().toISOString()
+      message:
+        "🎯 Use este IP na API do Clash Royale: developer.clashroyale.com",
+      timestamp: new Date().toISOString(),
     });
   } catch (error) {
-    res.status(500).json({ 
+    res.status(500).json({
       error: error.message,
-      message: 'Tente acessar https://api.ipify.org manualmente'
+      message: "Tente acessar https://api.ipify.org manualmente",
     });
   }
 });
