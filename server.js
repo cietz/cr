@@ -23,6 +23,30 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// ==========================================
+// SERVIR ARQUIVOS ESTÁTICOS COM MAPEAMENTO CORRETO
+// ==========================================
+
+// Mapear /_next/ para store.supercell.com/_next/
+app.use(
+  "/_next",
+  express.static(path.join(__dirname, "store.supercell.com/_next"))
+);
+
+// Mapear /images/ para store.supercell.com/images/
+app.use(
+  "/images",
+  express.static(path.join(__dirname, "store.supercell.com/images"))
+);
+
+// Mapear /rive-assets/ para store.supercell.com/rive-assets/
+app.use(
+  "/rive-assets",
+  express.static(path.join(__dirname, "store.supercell.com/rive-assets"))
+);
+
+// Servir arquivos da raiz
 app.use(express.static("."));
 
 // Serve arquivos estáticos
