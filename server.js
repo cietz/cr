@@ -75,12 +75,13 @@ if (fs.existsSync(apiDataPath)) {
   });
 }
 
-// Rota de saúde
+// Rota de saúde para Railway
 app.get("/health", (req, res) => {
-  res.json({
-    status: "OK",
+  res.status(200).json({
+    status: "healthy",
     service: "Clash Royale Store",
     timestamp: new Date().toISOString(),
+    port: PORT,
     utmifyProxy: `Running on port ${UTMIFY_PORT}`,
   });
 });
@@ -88,11 +89,12 @@ app.get("/health", (req, res) => {
 // ==========================================
 // INICIA SERVIDORES
 // ==========================================
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log("🎮 Clash Royale Store rodando na porta", PORT);
   console.log("📊 UTMify Proxy rodando na porta", UTMIFY_PORT);
   console.log("🌐 Ambiente:", process.env.NODE_ENV || "development");
-  console.log("🚀 Servidor pronto!");
+  console.log("✅ Servidor pronto e aceitando conexões!");
+  console.log("🏥 Healthcheck disponível em /health");
 });
 
 // Inicia servidor UTMify na porta configurada
