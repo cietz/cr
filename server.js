@@ -57,22 +57,35 @@ app.post("/api/create-pix", (req, res) => {
 // Carrega dados mockados da API
 const apiDataPath = path.join(__dirname, "api-data");
 if (fs.existsSync(apiDataPath)) {
-  const manifest = JSON.parse(
-    fs.readFileSync(path.join(apiDataPath, "manifest.json"), "utf-8")
-  );
+  try {
+    const manifestPath = path.join(apiDataPath, "manifest.json");
+    if (fs.existsSync(manifestPath)) {
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
 
-  manifest.apis.forEach((api) => {
-    const filePath = path.join(apiDataPath, api.file);
-    if (fs.existsSync(filePath)) {
-      const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-      app.get(api.path, (req, res) => {
-        res.json(data);
+      // O manifest é um array direto, não um objeto com propriedade apis
+      const apis = Array.isArray(manifest) ? manifest : manifest.apis || [];
+
+      apis.forEach((api) => {
+        // Usa url como path se path não existir
+        const apiPath = api.path || new URL(api.url).pathname;
+        const filePath = path.join(apiDataPath, api.file);
+
+        if (fs.existsSync(filePath)) {
+          const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+          app.get(apiPath, (req, res) => {
+            res.json(data);
+          });
+          app.post(apiPath, (req, res) => {
+            res.json(data);
+          });
+          console.log(`📦 Rota mockada: ${apiPath}`);
+        }
       });
-      app.post(api.path, (req, res) => {
-        res.json(data);
-      });
+      console.log(`✅ ${apis.length} rotas da API carregadas`);
     }
-  });
+  } catch (error) {
+    console.error("⚠️ Erro ao carregar manifest.json:", error.message);
+  }
 }
 
 // Rota de saúde para Railway
