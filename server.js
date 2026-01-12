@@ -170,6 +170,11 @@ app.get("/player", async (req, res) => {
 app.post("/api/create-pix", async (req, res) => {
   const { amount, customer, items } = req.body;
 
+  console.log(
+    "Recebido no /api/create-pix:",
+    JSON.stringify(req.body, null, 2)
+  );
+
   // Credenciais da Marchabb (definir nas variáveis de ambiente)
   const publicKey = process.env.MARCHABB_PUBLIC_KEY || "";
   const secretKey = process.env.MARCHABB_SECRET_KEY || "";
@@ -188,26 +193,31 @@ app.post("/api/create-pix", async (req, res) => {
     const auth =
       "Basic " + Buffer.from(publicKey + ":" + secretKey).toString("base64");
 
+    // Converte amount para centavos (verifica se já é em centavos ou não)
+    const amountInCents = amount > 1000 ? amount : Math.round(amount * 100);
+
     // Monta o payload conforme documentação Marchabb
     const payload = {
-      amount: Math.round(amount * 100), // Valor em centavos
+      amount: amountInCents,
       paymentMethod: "pix",
       pix: {
-        expiresInDays: 1, // PIX expira em 1 dia
+        expiresInDays: 1,
       },
       items:
         items && items.length > 0
           ? items.map((item) => ({
-              name: item.name || "Produto Clash Royale",
-              quantity: item.quantity || 1,
-              unitPrice: Math.round((item.price || amount) * 100), // Preço em centavos
-              tangible: false, // Produto digital
+              name: item.title || item.name || "Produto Clash Royale",
+              quantity: item.quantity || item.qty || 1,
+              // unitPrice já vem em centavos do checkout
+              unitPrice:
+                item.unitPrice || Math.round((item.price || 100) * 100),
+              tangible: item.tangible !== undefined ? item.tangible : false,
             }))
           : [
               {
                 name: "Produto Clash Royale",
                 quantity: 1,
-                unitPrice: Math.round(amount * 100),
+                unitPrice: amountInCents,
                 tangible: false,
               },
             ],
@@ -216,19 +226,20 @@ app.post("/api/create-pix", async (req, res) => {
         email: customer?.email || "cliente@email.com",
         document: {
           type: "cpf",
-          number: customer?.cpf?.replace(/\D/g, "") || "00000000000",
+          number: (
+            customer?.document?.number ||
+            customer?.cpf ||
+            "00000000000"
+          ).replace(/\D/g, ""),
         },
         phone: {
           countryCode: "55",
-          areaCode: customer?.phone?.substring(0, 2) || "11",
-          number:
-            customer?.phone?.substring(2)?.replace(/\D/g, "") || "999999999",
+          areaCode: (customer?.phone || "11999999999").substring(0, 2),
+          number: (customer?.phone || "11999999999")
+            .substring(2)
+            .replace(/\D/g, ""),
         },
       },
-      metadata: JSON.stringify({
-        source: "clash-royale-store",
-        timestamp: Date.now(),
-      }),
     };
 
     console.log(
