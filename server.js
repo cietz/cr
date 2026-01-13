@@ -62,6 +62,31 @@ app.use(
 app.use(express.static("."));
 
 // ==========================================
+// ROTA DE DEBUG DO CLOAKER
+// ==========================================
+app.get("/debug-cloaker", (req, res) => {
+  const userAgent = req.headers["user-agent"] || "";
+  const referer = req.headers["referer"] || "";
+  
+  const { isBot, isMobile, hasValidUtms } = require("./cloaker");
+  
+  const debugInfo = {
+    userAgent: userAgent,
+    referer: referer,
+    query: req.query,
+    ip: req.ip || req.connection?.remoteAddress,
+    checks: {
+      isBot: isBot(userAgent),
+      isMobile: isMobile(userAgent),
+      hasValidUtms: hasValidUtms(req.query, referer),
+    },
+    wouldAllow: !isBot(userAgent) && isMobile(userAgent) && hasValidUtms(req.query, referer),
+  };
+  
+  res.json(debugInfo);
+});
+
+// ==========================================
 // ROTAS PRINCIPAIS
 // ==========================================
 
