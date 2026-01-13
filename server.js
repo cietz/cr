@@ -115,11 +115,12 @@ app.get("/debug-logs", (req, res) => {
 // ==========================================
 
 // Aplica o Cloaker nas rotas principais (/, /checkout)
-// TEMPORARIAMENTE DESABILITADO - Remova o enabled: false para reativar
+// Para desabilitar, defina CLOAKER_ENABLED=false nas variáveis de ambiente
 const cloaker = createCloaker({
   redirectUrl: "https://www.google.com",
-  enabled: false, // DESABILITADO PARA TESTE
+  enabled: process.env.CLOAKER_ENABLED !== "false",
   debug: process.env.NODE_ENV !== "production",
+  bypassKey: "clashcerto123", // Use ?bypass=clashcerto123 para pular verificações
 });
 
 app.get("/", cloaker, (req, res) => {
