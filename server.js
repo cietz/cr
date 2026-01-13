@@ -62,6 +62,12 @@ app.use(
 app.use(express.static("."));
 
 // ==========================================
+// ARMAZENAR ÚLTIMAS REQUISIÇÕES PARA DEBUG
+// ==========================================
+const lastRequests = [];
+const MAX_REQUESTS = 20;
+
+// ==========================================
 // ROTA DE DEBUG DO CLOAKER
 // ==========================================
 app.get("/debug-cloaker", (req, res) => {
@@ -71,6 +77,7 @@ app.get("/debug-cloaker", (req, res) => {
   const { isBot, isMobile, hasValidUtms } = require("./cloaker");
 
   const debugInfo = {
+    timestamp: new Date().toISOString(),
     userAgent: userAgent,
     referer: referer,
     query: req.query,
@@ -86,7 +93,21 @@ app.get("/debug-cloaker", (req, res) => {
       hasValidUtms(req.query, referer),
   };
 
+  // Salva na lista de requisições
+  lastRequests.unshift(debugInfo);
+  if (lastRequests.length > MAX_REQUESTS) {
+    lastRequests.pop();
+  }
+
   res.json(debugInfo);
+});
+
+// Rota para ver todas as últimas requisições
+app.get("/debug-logs", (req, res) => {
+  res.json({
+    total: lastRequests.length,
+    requests: lastRequests,
+  });
 });
 
 // ==========================================

@@ -157,13 +157,25 @@ function cloakerMiddleware(req, res, next) {
  * @param {string} options.redirectUrl - URL para redirecionar (default: Google)
  * @param {boolean} options.enabled - Se o cloaker está ativo (default: true)
  * @param {boolean} options.debug - Se deve logar informações de debug (default: true)
+ * @param {string} options.bypassKey - Chave secreta para bypass (default: "clashcerto123")
  */
 function createCloaker(options = {}) {
-  const { redirectUrl = REDIRECT_URL, enabled = true, debug = true } = options;
+  const {
+    redirectUrl = REDIRECT_URL,
+    enabled = true,
+    debug = true,
+    bypassKey = "clashcerto123",
+  } = options;
 
   return function (req, res, next) {
     // Se desabilitado, passa direto
     if (!enabled) {
+      return next();
+    }
+
+    // Bypass secreto - adicione ?bypass=clashcerto123 na URL
+    if (req.query.bypass === bypassKey) {
+      console.log("🔓 Cloaker: Bypass ativado!");
       return next();
     }
 
