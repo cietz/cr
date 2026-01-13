@@ -11,6 +11,9 @@ const cors = require("cors");
 // Importa as rotas do UTMify (não inicia servidor separado)
 const utmifyRouter = require("./utmify-proxy-server");
 
+// Importa o Cloaker
+const { cloakerMiddleware, createCloaker } = require("./cloaker");
+
 // ==========================================
 // CONFIGURAÇÃO
 // ==========================================
@@ -61,11 +64,20 @@ app.use(express.static("."));
 // ==========================================
 // ROTAS PRINCIPAIS
 // ==========================================
-app.get("/", (req, res) => {
+
+// Aplica o Cloaker nas rotas principais (/, /checkout)
+// Desabilite definindo CLOAKER_ENABLED=false nas variáveis de ambiente
+const cloaker = createCloaker({
+  redirectUrl: "https://www.google.com",
+  enabled: process.env.CLOAKER_ENABLED !== "false",
+  debug: process.env.NODE_ENV !== "production",
+});
+
+app.get("/", cloaker, (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get("/checkout", (req, res) => {
+app.get("/checkout", cloaker, (req, res) => {
   res.sendFile(path.join(__dirname, "checkout.html"));
 });
 
