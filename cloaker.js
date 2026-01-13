@@ -163,25 +163,48 @@ function createCloaker(options = {}) {
     const userAgent = req.headers["user-agent"] || "";
     const referer = req.headers["referer"] || "";
 
+    if (debug) {
+      console.log("\n=== CLOAKER DEBUG ===");
+      console.log("📱 User-Agent:", userAgent);
+      console.log("🔗 Referer:", referer);
+      console.log("📊 Query params:", req.query);
+      console.log("🌐 IP:", req.ip || req.connection?.remoteAddress);
+    }
+
     // 1. Verifica se é bot
-    if (isBot(userAgent)) {
-      if (debug) console.log("🤖 Cloaker: Bot detectado");
+    const botDetected = isBot(userAgent);
+    if (botDetected) {
+      if (debug) {
+        console.log("🤖 Cloaker: Bot detectado!");
+        console.log("   UA checado:", userAgent);
+      }
       return res.redirect(redirectUrl);
     }
 
     // 2. Verifica se é mobile
-    if (!isMobile(userAgent)) {
-      if (debug) console.log("💻 Cloaker: Não é mobile");
+    const mobileDetected = isMobile(userAgent);
+    if (!mobileDetected) {
+      if (debug) {
+        console.log("💻 Cloaker: Não é mobile!");
+        console.log("   UA checado:", userAgent);
+      }
       return res.redirect(redirectUrl);
     }
 
     // 3. Verifica UTMs
-    if (!hasValidUtms(req.query, referer)) {
-      if (debug) console.log("🔗 Cloaker: UTMs inválidas");
+    const validUtms = hasValidUtms(req.query, referer);
+    if (!validUtms) {
+      if (debug) {
+        console.log("🔗 Cloaker: UTMs inválidas!");
+        console.log("   fbclid:", req.query.fbclid);
+        console.log("   utm_source:", req.query.utm_source);
+        console.log("   utm_medium:", req.query.utm_medium);
+        console.log("   utm_campaign:", req.query.utm_campaign);
+      }
       return res.redirect(redirectUrl);
     }
 
-    if (debug) console.log("✅ Cloaker: Acesso permitido");
+    if (debug) console.log("✅ Cloaker: Acesso permitido\n");
     next();
   };
 }
