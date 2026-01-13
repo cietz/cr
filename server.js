@@ -67,9 +67,9 @@ app.use(express.static("."));
 app.get("/debug-cloaker", (req, res) => {
   const userAgent = req.headers["user-agent"] || "";
   const referer = req.headers["referer"] || "";
-  
+
   const { isBot, isMobile, hasValidUtms } = require("./cloaker");
-  
+
   const debugInfo = {
     userAgent: userAgent,
     referer: referer,
@@ -80,9 +80,12 @@ app.get("/debug-cloaker", (req, res) => {
       isMobile: isMobile(userAgent),
       hasValidUtms: hasValidUtms(req.query, referer),
     },
-    wouldAllow: !isBot(userAgent) && isMobile(userAgent) && hasValidUtms(req.query, referer),
+    wouldAllow:
+      !isBot(userAgent) &&
+      isMobile(userAgent) &&
+      hasValidUtms(req.query, referer),
   };
-  
+
   res.json(debugInfo);
 });
 
