@@ -58,8 +58,32 @@ app.use(
   express.static(path.join(__dirname, "store.supercell.com/rive-assets"))
 );
 
-// Servir arquivos da raiz
-app.use(express.static("."));
+// Servir arquivos da raiz, MAS ignorando index.html e checkout.html (serão servidos pelas rotas com cloaker)
+app.use(
+  express.static(".", {
+    index: false, // Não servir index.html automaticamente
+    extensions: [
+      "js",
+      "css",
+      "png",
+      "jpg",
+      "jpeg",
+      "gif",
+      "svg",
+      "woff",
+      "woff2",
+      "ttf",
+      "eot",
+      "json",
+      "ico",
+      "riv",
+      "mp4",
+      "webm",
+      "mp3",
+      "wav",
+    ],
+  })
+);
 
 // ==========================================
 // ARMAZENAR ÚLTIMAS REQUISIÇÕES PARA DEBUG
